@@ -7,6 +7,8 @@ import javax.jms.Session;
 import javax.jms.TextMessage;
 import javax.naming.NamingException;
 
+
+
 public class SubjectGateway {
 
 	public static final String UPDATE_TOPIC_NAME = "jms/Update";
@@ -25,10 +27,11 @@ public class SubjectGateway {
 	}
 
 	protected void initialize() throws JMSException, NamingException {
-		ConnectionFactory connectionFactory = JndiUtil.getQueueConnectionFactory();
+                JNDIUtil jndi = new JNDIUtil();
+		ConnectionFactory connectionFactory = jndi.getConnectionFactory(jndi.factoryName);
 		connection = connectionFactory.createConnection();
 		session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-		Destination updateTopic = JndiUtil.getDestination(UPDATE_TOPIC_NAME);
+		Destination updateTopic = jndi.getDestination(UPDATE_TOPIC_NAME);
 		updateProducer = session.createProducer(updateTopic);
 
 		connection.start();
