@@ -8,7 +8,7 @@ import javax.jms.MessageListener;
 import javax.jms.Session;
 import javax.jms.TextMessage;
 import javax.naming.NamingException;
-import javax.jms.Observer;
+import java.util.Observer;
 
 public class ObserverGateway implements MessageListener {
 
@@ -30,11 +30,11 @@ public class ObserverGateway implements MessageListener {
 
 	protected void initialize(Observer observer) throws JMSException, NamingException {
 		this.observer = observer;
-
-		ConnectionFactory connectionFactory = JndiUtil.getQueueConnectionFactory();
+                JNDIUtil jndi = new JNDIUtil();
+		ConnectionFactory connectionFactory = jndi.getConnectionFactory(jndi.factoryName);
 		connection = connectionFactory.createConnection();
 		Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-		Destination updateTopic = JndiUtil.getDestination(UPDATE_TOPIC_NAME);
+		Destination updateTopic = jndi.getDestination(UPDATE_TOPIC_NAME);
 		updateConsumer = session.createConsumer(updateTopic);
 		updateConsumer.setMessageListener(this);
 	}
@@ -61,6 +61,6 @@ public class ObserverGateway implements MessageListener {
 	}
 
 	private void update(String newState) throws JMSException {
-		observer.update(newState);
+            observer.update(newState);
 	}
 }

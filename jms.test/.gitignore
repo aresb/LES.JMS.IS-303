@@ -1,1 +1,6 @@
 /jmsKlient/nbproject/private/
+/jms.test-ejb/build/
+/jms.test-ejb/dist/
+/jms.test-war/build/
+/build/
+/jms.test-war/dist/
