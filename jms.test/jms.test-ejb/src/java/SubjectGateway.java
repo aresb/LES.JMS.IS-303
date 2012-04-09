@@ -1,20 +1,21 @@
-import javax.jms.Connection;
-import javax.jms.ConnectionFactory;
-import javax.jms.Destination;
-import javax.jms.JMSException;
-import javax.jms.MessageProducer;
-import javax.jms.Session;
-import javax.jms.TextMessage;
+import javax.annotation.Resource;
+import javax.jms.*;
 import javax.naming.NamingException;
-
 
 
 public class SubjectGateway {
 
+    
 	public static final String UPDATE_TOPIC_NAME = "jms/Update";
 	private Connection connection;
 	private Session session;
 	private MessageProducer updateProducer;
+        
+        @Resource(name="connFactory", mappedName="webTrackerConnFactory")
+        private QueueConnectionFactory qFactory;
+
+        @Resource(name="jmsQueue", mappedName="webTrackerQueue")
+        private Queue queue;
 
 	protected SubjectGateway() {
 		super();
@@ -27,11 +28,10 @@ public class SubjectGateway {
 	}
 
 	protected void initialize() throws JMSException, NamingException {
-                JNDIUtil jndi = new JNDIUtil();
-		ConnectionFactory connectionFactory = jndi.getConnectionFactory(jndi.factoryName);
+		ConnectionFactory connectionFactory = qFactory;
 		connection = connectionFactory.createConnection();
 		session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-		Destination updateTopic = jndi.getDestination(UPDATE_TOPIC_NAME);
+		Destination updateTopic = queue;
 		updateProducer = session.createProducer(updateTopic);
 
 		connection.start();
@@ -48,4 +48,5 @@ public class SubjectGateway {
 			connection.close();
 		}
 	}
+        
 }

@@ -9,6 +9,8 @@ import javax.jms.Session;
 import javax.jms.TextMessage;
 import javax.naming.NamingException;
 import java.util.Observer;
+import java.util.Observable;
+
 
 public class ObserverGateway implements MessageListener {
 
@@ -61,6 +63,8 @@ public class ObserverGateway implements MessageListener {
 	}
 
 	private void update(String newState) throws JMSException {
-            observer.update(newState);
+            Observable o = null;
+            Object arg = null;
+            observer.update(o, arg);
 	}
 }

@@ -14,19 +14,20 @@ import java.util.Hashtable;
 * A wrapper class for JNDI calls
 *
 */
-public class JNDIUtil
-{
+public class JNDIUtil{
+  
+    
     public JNDIUtil(){
     }
+   
     public String factoryName;
-private Context context;
-public JNDIUtil(String icf, String url) throws JMSException, NamingException
-{
-Hashtable environment = new Hashtable();
-environment.put(Context.INITIAL_CONTEXT_FACTORY, icf );
-environment.put(Context.PROVIDER_URL, url);
-context= new InitialContext( environment );
-}
+    private Context context;
+    public JNDIUtil(String icf, String url) throws JMSException, NamingException    {
+        Hashtable environment = new Hashtable();
+        environment.put(Context.INITIAL_CONTEXT_FACTORY, icf );
+        environment.put(Context.PROVIDER_URL, url);
+        context= new InitialContext( environment );
+    }
 /**
 * @param ObjName Object Name to be retrieved
 * @return Retrieved Object
