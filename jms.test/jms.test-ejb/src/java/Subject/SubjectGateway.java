@@ -19,7 +19,7 @@ public class SubjectGateway {
         @Resource(name="jmsQueue", mappedName="webTrackerQueue")
         private Queue queue;
 
-	protected SubjectGateway() {
+	public SubjectGateway() {
 		super();
 	}
 
@@ -29,7 +29,7 @@ public class SubjectGateway {
 		return gateway;
 	}
 
-	protected void initialize() throws JMSException, NamingException {
+	public void initialize() throws JMSException, NamingException {
 		ConnectionFactory connectionFactory = qFactory;
 		connection = connectionFactory.createConnection();
 		session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+  <!-- This is the default sidebar menu for HRMS -->
+  <head>
+    <title>IGNORED</title>
+  </head>
+
+  <body>
+    <ui:composition>
+      <h3>Menu</h3>
+      <h:panelGrid columns="1">
+        <h:link value="Home" outcome="index"
+                styleClass="#{fn:startsWith(view.viewId,'/index') ? 'bold' : 'plain'}"/>
+
+        <h:link value="Modules" outcome="modules"
+                styleClass="#{fn:startsWith(view.viewId,'/module') ? 'bold' : 'plain'}"/>
+
+        <h:link value="Students" outcome="students"
+                styleClass="#{(fn:startsWith(view.viewId,'/student') ? 'bold' : 'plain')}" />
+      </h:panelGrid>
+    </ui:composition>
+  </body>
+</html>

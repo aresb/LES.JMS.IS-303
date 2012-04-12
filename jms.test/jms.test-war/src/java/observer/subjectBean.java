@@ -1,9 +1,11 @@
-package Subject;
+package observer;
 
 
+import Subject.SubjectGateway;
 import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
+import Subject.SubjectGateway;
 
 /**
  * @author Kjersti

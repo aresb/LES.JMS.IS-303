@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<!-- This template defines the layout for all pages in the HRMS
+  application -->
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+  <h:head>
+    <title>MiniLIP</title>
+    <!-- this includes a stylesheet link in the page -->
+    <h:outputStylesheet library="css" name="screen.css" />
+  </h:head>
+  <h:body>
+    <div id="header">
+      <h1>MiniLIP (Learning at Individual Pace)</h1>
+    </div>
+
+    <div class="mainbg">
+      <div class="menubg">
+        <div class="main">
+          <ui:insert name="content">
+            <ui:include src="/common/nocontent.xhtml" />
+          </ui:insert>
+        </div>
+
+        <div class="menu">
+          <!-- Each page that uses this template may define a
+          component named menu. It will replace this tag. -->
+          <ui:insert name="menu">
+            <!-- include a default menu if the page doesn't
+            define one -->
+            <ui:include src="/common/menu.xhtml" />
+          </ui:insert>
+        </div>
+      </div>
+    </div>
+    <div id="footer">
+      <h:messages/>
+    </div>
+  </h:body>
+</html>
