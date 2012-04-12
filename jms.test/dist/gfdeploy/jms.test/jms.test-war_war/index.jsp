@@ -16,7 +16,7 @@
         <h1>Hello World!</h1>
        <h:form>
             <h:outputText value="Info om modulen:" />
-            <h:inputText value="#{observerBean.getText()}" />
+            <h:inputText value=#{"objectBean.getText()"} />
             
         </h:form>
     </body>
