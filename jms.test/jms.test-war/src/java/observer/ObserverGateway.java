@@ -14,6 +14,7 @@ import java.util.Observer;
 import java.util.Observable;
 import javax.annotation.Resource;
 import javax.jms.*;
+import java.lang.Object;
 
 
 public class ObserverGateway implements MessageListener {
@@ -21,9 +22,12 @@ public class ObserverGateway implements MessageListener {
         //Denne er kanskje feil. Endret fra "jms/update"
 	public static final String UPDATE_TOPIC_NAME = "webTrackerQueue";
         
-	private Observer observer;
+	public Observer observer;
+        public Observable observable;
 	private Connection connection;
 	private MessageConsumer updateConsumer;
+        public String newState;
+        public Object obj;
                 
         @Resource(name="connFactory", mappedName="webTrackerConnFactory")
         private QueueConnectionFactory qFactory;
@@ -37,8 +41,10 @@ public class ObserverGateway implements MessageListener {
 
 	public static ObserverGateway newGateway(Observer observer)
 		throws JMSException, NamingException {
+           
 		ObserverGateway gateway = new ObserverGateway();
 		gateway.initialize(observer);
+          
 		return gateway;
 	}
 
@@ -51,11 +57,11 @@ public class ObserverGateway implements MessageListener {
 		updateConsumer = session.createConsumer(updateTopic);
 		updateConsumer.setMessageListener(this);
 	}
-
+        @Override
 	public void onMessage(Message message) {
 		try {
 			TextMessage textMsg = (TextMessage) message; // assume cast always works
-			String newState = textMsg.getText();
+			newState = textMsg.getText();
 			update(newState);
 		} catch (JMSException e) {
 			e.printStackTrace();
@@ -63,19 +69,30 @@ public class ObserverGateway implements MessageListener {
 	}
 
 	public void attach() throws JMSException {
+            try{
 		connection.start();
+            }catch(JMSException jmsx){
+                System.out.println(jmsx);
+            }
 	}
 
 	public void detach() throws JMSException {
-		if (connection != null) {
+            try{
+                if (connection != null) {
 			connection.stop();
 			connection.close();
 		}
+            }catch(JMSException jmsx3){
+            System.out.println(jmsx3);
+            }
 	}
         //TODO: Denne metoden skal hente oppdateringer fra SubjectGateway
 	private void update(String newState) throws JMSException {
-            Observable o = null;
-            Object arg = null;
-            observer.update(o, arg);
-	}
+            //try{
+            observer.update(observable, obj);
+            /*}catch(JMSException jmsx2){
+             *   System.out.println(jmsx2);
+            *}*/
+        }
+
 }
