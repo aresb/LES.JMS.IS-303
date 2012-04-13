@@ -1,4 +1,4 @@
-package Subject;
+package observer;
 
 import javax.annotation.Resource;
 import javax.jms.*;
@@ -13,10 +13,10 @@ public class SubjectGateway {
 	private Session session;
 	private MessageProducer updateProducer;
         
-        @Resource(mappedName="webTrackerConnFactory")
+        @Resource(name="connFactory", mappedName="webTrackerConnFactory")
         private QueueConnectionFactory qFactory;
 
-        @Resource(mappedName="webTrackerQueue")
+        @Resource(name="jmsQueue", mappedName="webTrackerQueue")
         private Queue queue;
 
 	public SubjectGateway() {

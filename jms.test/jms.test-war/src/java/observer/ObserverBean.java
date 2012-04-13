@@ -9,7 +9,7 @@ package observer;
  *
  * @author are
  */
-import Subject.ObserverGateway;
+//import Subject.ObserverGateway;
 import java.io.Serializable;
 import java.util.Observer;
 import javax.enterprise.context.SessionScoped;
@@ -27,19 +27,20 @@ public class ObserverBean implements Serializable{
     private Message message;
     
     private void setMessage(String beanmessage){
-        beanmessage = ObserverGateway.UPDATE_TOPIC_NAME;
+        this.beanmessage = beanmessage;
     }
     
     private Message getBeanMessage() throws JMSException, NamingException{
         try{
              ObserverGateway og = new ObserverGateway();
              try{
-             og.newGateway(observer);
+                og.attach(); 
+                og.newGateway(observer);
              }catch(NamingException ne){
-             System.out.println(ne);
+                System.out.println(ne);
              }
             
-                og.attach(); 
+                
                 og.onMessage(message);
                 og.detach();
              

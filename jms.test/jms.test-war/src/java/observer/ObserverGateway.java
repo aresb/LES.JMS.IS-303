@@ -28,27 +28,26 @@ public class ObserverGateway implements MessageListener {
 	private MessageConsumer updateConsumer;
         public String newState;
         public Object obj;
+        public Object observerobj;
                 
-        @Resource(name="connFactory", mappedName="webTrackerConnFactory")
-        private QueueConnectionFactory qFactory;
+        @Resource(mappedName="webTrackerConnFactory")
+        private static QueueConnectionFactory qFactory;
 
-        @Resource(name="jmsQueue", mappedName="webTrackerQueue")
-        private Queue queue;
+        @Resource(mappedName="webTrackerQueue")
+        private static Queue queue;
 
-	protected ObserverGateway() {
+	public ObserverGateway() {
 		super();
 	}
 
 	public static ObserverGateway newGateway(Observer observer)
 		throws JMSException, NamingException {
-           
 		ObserverGateway gateway = new ObserverGateway();
 		gateway.initialize(observer);
-          
 		return gateway;
 	}
 
-	protected void initialize(Observer observer) throws JMSException, NamingException {
+	public void initialize(Observer observer) throws JMSException, NamingException {
 		this.observer = observer;   
 		ConnectionFactory connectionFactory = qFactory;
 		connection = connectionFactory.createConnection();

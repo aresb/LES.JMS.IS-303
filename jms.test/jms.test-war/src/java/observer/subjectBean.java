@@ -1,11 +1,12 @@
 package observer;
 
 
-import Subject.SubjectGateway;
+
+//import Subject.SubjectGateway;
 import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
-import Subject.SubjectGateway;
+
 
 /**
  * @author Kjersti
@@ -34,8 +35,9 @@ public class subjectBean implements Serializable {
     }
 
     public void sendMessage(){
-        SubjectGateway s = new SubjectGateway();
+        
         try {
+            SubjectGateway s = new SubjectGateway();
             s.newGateway();
             s.initialize();
             s.notify(getMessage());
