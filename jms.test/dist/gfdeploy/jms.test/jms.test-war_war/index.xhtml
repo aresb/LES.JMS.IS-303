@@ -14,7 +14,9 @@ and open the template in the editor.
 <p>Random text</p>
         <h:form>
             <h:outputText value="Melding fra JMS:" />
-            <h:outputText value="#{observerBean.getBeanMessage()}" />
+            <h:outputText action="#{recieveMessageBean.onMessage()}" />
+            <h:outputText value="#{recieveMessageBean.getMessagetext()}" />
+            
         </h:form>
 
     </h:body>

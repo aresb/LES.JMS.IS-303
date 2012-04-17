@@ -11,9 +11,8 @@
         <p>
         <h:form>
             <h:outputText value="Skriv en melding" />
-            <h:inputText action="#{subjectBean.setMessage()}" />
-            <h:commandButton value="Save" action="#{subjectBean.sendMessage()}"/>
-            
+            <h:inputText value="#{sendMessageBean.messagetext}" />
+            <h:commandButton value="Send" action="#{sendMessageBean.sendMessage}"/>
         </h:form>
         </p>
     </h:body>

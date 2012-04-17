@@ -33,9 +33,11 @@ public class ObserverBean implements Serializable{
     private Message getBeanMessage() throws JMSException, NamingException{
         try{
              ObserverGateway og = new ObserverGateway();
+             
              try{
                 og.attach(); 
                 og.newGateway(observer);
+                assert og != null;
              }catch(NamingException ne){
                 System.out.println(ne);
              }

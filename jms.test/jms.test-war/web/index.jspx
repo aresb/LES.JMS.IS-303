@@ -15,10 +15,16 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+      
+          <h:form>
+            <h:outputText value="Skriv en melding" />
+            <h:inputText value="#{sendMessageBean.messagetext}" />
+            <h:commandButton value="Send" action="#{sendMessageBean.sendMessage}"/>
+        </h:form>
        <h:form>
             <h:outputText value="Melding fra JMS:" />
-            <h:outputText value="#{observerBean.getBeanMessage()}" />
+            <h:outputText value="#{recieveMessageBean.onMessage()}" />
+            <h:outputText value="#{recieveMessageBean.getMessagetext()}" />
             
         </h:form>
     </body>
