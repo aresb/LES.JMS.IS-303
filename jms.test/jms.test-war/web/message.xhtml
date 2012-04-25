@@ -12,8 +12,9 @@
         <h:form>
             <h:outputText value="Skriv en melding" />
             <h:inputText value="#{sendMessageBean.messagetext}" />
-            <h:commandButton value="Send" action="#{sendMessageBean.sendMessage}"/>
+            <h:commandButton value="Send" action="#{sendMessageBean.sendMessage()}"/>
         </h:form>
         </p>
+        <a href="index.xhtml">Index</a>
     </h:body>
 </html>

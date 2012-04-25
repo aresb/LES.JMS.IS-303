@@ -15,9 +15,10 @@ and open the template in the editor.
         <h:form>
             <h:outputText value="Melding fra JMS:" />
             <h:outputText action="#{recieveMessageBean.onMessage()}" />
-            <h:outputText value="#{recieveMessageBean.getMessagetext()}" />
+            <h:outputText action="#{recieveMessageBean.getMessagetext()}" />
             
         </h:form>
-
+<br />
+        <a href="messages.xhtml">Skriv en melding</a>
     </h:body>
 </html>
